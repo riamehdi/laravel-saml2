@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'cert_path' => 'storage/saml2',
+    'cert_path' => 'saml2',
     'sp_cert_file' => 'sp.crt',
     'sp_key_file' => 'sp.pem',
     'idp_cert_file' => 'idp.crt',

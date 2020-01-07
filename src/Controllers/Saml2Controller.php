@@ -56,8 +56,8 @@ class Saml2Controller extends Controller
         }
         $this->sp_acs_url = route('saml2-acs');
 
-        $this->sp_cert_file = '../' . config('saml2.cert_path') . '/' . config('saml2.sp_cert_file');
-        $this->sp_key_file = '../' . config('saml2.cert_path') . '/' . config('saml2.sp_key_file');
+        $this->sp_cert_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.sp_cert_file'));
+        $this->sp_key_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.sp_key_file'));
 
         // logging
         Config::set('logging.channels.' . config('saml2.log_channel') . '.driver', config('saml2.log_driver'));
