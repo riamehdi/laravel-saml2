@@ -38,6 +38,7 @@ class Saml2Controller extends Controller
     private $sp_acs_url;
     private $sp_cert_file;
     private $sp_key_file;
+    private $idp_cert_file;
 
     public function __construct()
     {
@@ -58,6 +59,7 @@ class Saml2Controller extends Controller
 
         $this->sp_cert_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.sp_cert_file'));
         $this->sp_key_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.sp_key_file'));
+        $this->idp_cert_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.idp_cert_file'));
 
         // logging
         Config::set('logging.channels.' . config('saml2.log_channel') . '.driver', config('saml2.log_driver'));
@@ -123,7 +125,7 @@ class Saml2Controller extends Controller
         }
 
         // Verify signature
-        $key = KeyHelper::createPublicKey(X509Certificate::fromFile($this->sp_cert_file));
+        $key = KeyHelper::createPublicKey(X509Certificate::fromFile($this->idp_cert_file));
         /** @var \LightSaml\Model\XmlDSig\SignatureXmlReader $signatureReader */
         try {
             if ($signatureReader->validate($key)) {
