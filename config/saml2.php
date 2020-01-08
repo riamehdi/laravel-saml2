@@ -1,9 +1,6 @@
 <?php
 
 return [
-
-    // https://coderwall.com/p/a3a5xg/splitting-a-project-sub-directory-to-a-new-git-repo
-
     'cert_path' => 'saml2',
     'sp_cert_file' => 'sp.crt',
     'sp_key_file' => 'sp.pem',
