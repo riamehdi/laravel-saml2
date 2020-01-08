@@ -1,11 +1,11 @@
 <?php
 
-namespace DaVikingCode\Saml2;
+namespace DaVikingCode\LaravelSaml2;
 
-use DaVikingCode\Saml2\Middleware\Authenticate;
+use DaVikingCode\LaravelSaml2\Middleware\Authenticate;
 use Illuminate\Support\ServiceProvider;
 
-class Saml2ServiceProvider extends ServiceProvider
+class LaravelSaml2ServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
@@ -19,7 +19,7 @@ class Saml2ServiceProvider extends ServiceProvider
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
-        $this->app['router']->namespace('DaVikingCode\\Saml2\\Controllers')
+        $this->app['router']->namespace('DaVikingCode\\LaravelSaml2\\Controllers')
             ->middleware(['web'])
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -41,11 +41,11 @@ class Saml2ServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/saml2.php', 'saml2');
+        $this->mergeConfigFrom(__DIR__.'/../config/laravelsaml2.php', 'laravelsaml2');
 
         // Register the service the package provides.
-        $this->app->singleton('saml2', function ($app) {
-            return new Saml2;
+        $this->app->singleton('laravelsaml2', function ($app) {
+            return new LaravelSaml2;
         });
     }
 
@@ -56,7 +56,7 @@ class Saml2ServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['saml2'];
+        return ['laravelsaml2'];
     }
 
     /**
@@ -68,8 +68,8 @@ class Saml2ServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file. ($ php artisan vendor:publish --tag=saml2.config)
         $this->publishes([
-            __DIR__.'/../config/saml2.php' => config_path('saml2.php'),
-        ], 'saml2.config');
+            __DIR__.'/../config/laravelsaml2.php' => config_path('laravelsaml2.php'),
+        ], 'laravelsaml2.config');
 
         // Publishing the views.
         /*$this->publishes([

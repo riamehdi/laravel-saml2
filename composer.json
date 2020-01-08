@@ -1,5 +1,5 @@
 {
-    "name": "davikingcode/saml2",
+    "name": "davikingcode/laravel-saml2",
     "description": ":description",
     "license": "license",
     "authors": [
@@ -10,7 +10,7 @@
         }
     ],
     "homepage": "https://github.com/davikingcode/saml2",
-    "keywords": ["DaVikingCode","Laravel", "Saml2"],
+    "keywords": ["DaVikingCode", "Laravel", "Saml2"],
     "require": {
         "illuminate/support": "~5|~6",
         "lightsaml/lightsaml": "^1.4"
@@ -23,21 +23,21 @@
     },
     "autoload": {
         "psr-4": {
-            "DaVikingCode\\Saml2\\": "src/"
+            "DaVikingCode\\LaravelSaml2\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DaVikingCode\\Saml2\\Tests\\": "tests"
+            "DaVikingCode\\LaravelSaml2\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "DaVikingCode\\Saml2\\Saml2ServiceProvider"
+                "DaVikingCode\\LaravelSaml2\\LaravelSaml2ServiceProvider"
             ],
             "aliases": {
-                "Saml2": "DaVikingCode\\Saml2\\Facades\\Saml2"
+                "LaravelSaml2": "DaVikingCode\\LaravelSaml2\\Facades\\LaravelSaml2"
             }
         }
     }

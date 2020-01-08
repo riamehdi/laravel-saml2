@@ -1,10 +1,10 @@
 <?php
 
-namespace DaVikingCode\Saml2\Facades;
+namespace DaVikingCode\LaravelSaml2\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Saml2 extends Facade
+class LaravelSaml2 extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Saml2 extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'saml2';
+        return 'laravelsaml2';
     }
 }

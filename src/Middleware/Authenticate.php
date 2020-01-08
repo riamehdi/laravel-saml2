@@ -1,6 +1,6 @@
 <?php
 
-namespace DaVikingCode\Saml2\Middleware;
+namespace DaVikingCode\LaravelSaml2\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace DaVikingCode\Saml2\Controllers;
+namespace DaVikingCode\LaravelSaml2\Controllers;
 
 use App\User;
 use Illuminate\Routing\Controller;
@@ -29,7 +29,7 @@ use LightSaml\Context\Profile\MessageContext;
 use LightSaml\Model\XmlDSig\SignatureXmlReader;
 
 
-class Saml2Controller extends Controller
+class LaravelSaml2Controller extends Controller
 {
     private $idp_logout_url;
     private $idp_login_url;
@@ -45,28 +45,28 @@ class Saml2Controller extends Controller
         // environment
         if(App::environment() == 'production')
         {
-            $this->sp_entity_id = config('saml2.sp_entity_id_prod');
-            $this->idp_logout_url = config('saml2.idp_logout_url_prod') . $this->sp_entity_id;
-            $this->idp_login_url = config('saml2.idp_login_url_prod');
+            $this->sp_entity_id = config('laravelsaml2.sp_entity_id_prod');
+            $this->idp_logout_url = config('laravelsaml2.idp_logout_url_prod') . $this->sp_entity_id;
+            $this->idp_login_url = config('laravelsaml2.idp_login_url_prod');
         }
         else // dev or local
         {
-            $this->sp_entity_id = config('saml2.sp_entity_id_dev');
-            $this->idp_logout_url = config('saml2.idp_logout_url_dev') . $this->sp_entity_id;
-            $this->idp_login_url = config('saml2.idp_login_url_dev');
+            $this->sp_entity_id = config('laravelsaml2.sp_entity_id_dev');
+            $this->idp_logout_url = config('laravelsaml2.idp_logout_url_dev') . $this->sp_entity_id;
+            $this->idp_login_url = config('laravelsaml2.idp_login_url_dev');
         }
         $this->sp_acs_url = route('saml2-acs');
 
-        $this->sp_cert_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.sp_cert_file'));
-        $this->sp_key_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.sp_key_file'));
-        $this->idp_cert_file = storage_path(config('saml2.cert_path') . '/' . config('saml2.idp_cert_file'));
+        $this->sp_cert_file = storage_path(config('laravelsaml2.cert_path') . '/' . config('laravelsaml2.sp_cert_file'));
+        $this->sp_key_file = storage_path(config('laravelsaml2.cert_path') . '/' . config('laravelsaml2.sp_key_file'));
+        $this->idp_cert_file = storage_path(config('laravelsaml2.cert_path') . '/' . config('laravelsaml2.idp_cert_file'));
 
         // logging
-        Config::set('logging.channels.' . config('saml2.log_channel') . '.driver', config('saml2.log_driver'));
-        Config::set('logging.channels.' . config('saml2.log_channel') . '.path', config('saml2.log_path'));
-        Config::set('logging.channels.' . config('saml2.log_channel') . '.ignore_exceptions', config('saml2.log_ignore_exceptions'));
-        Config::set('logging.channels.' . config('saml2.log_channel') . '.level', config('saml2.log_level'));
-        Config::set('logging.channels.' . config('saml2.log_channel') . '.days', config('saml2.log_days'));
+        Config::set('logging.channels.' . config('laravelsaml2.log_channel') . '.driver', config('laravelsaml2.log_driver'));
+        Config::set('logging.channels.' . config('laravelsaml2.log_channel') . '.path', config('laravelsaml2.log_path'));
+        Config::set('logging.channels.' . config('laravelsaml2.log_channel') . '.ignore_exceptions', config('laravelsaml2.log_ignore_exceptions'));
+        Config::set('logging.channels.' . config('laravelsaml2.log_channel') . '.level', config('laravelsaml2.log_level'));
+        Config::set('logging.channels.' . config('laravelsaml2.log_channel') . '.days', config('laravelsaml2.log_days'));
     }
 
     public function login()
@@ -164,7 +164,7 @@ class Saml2Controller extends Controller
             // TODO : create manager users / check for roles / other method.
 
             $domain_name = explode('@', $attributes['av2_mail'])[1];
-            if(in_array($domain_name, config('saml2.admin_domains')))
+            if(in_array($domain_name, config('laravelsaml2.admin_domains')))
             {
                 $user = User::updateOrCreate(
                     ['id_interne' => $attributes['av2_interne_id']],
@@ -208,7 +208,7 @@ class Saml2Controller extends Controller
             $user->update(['last_login' => now()]);
 
             // Save login activity in log
-            Log::stack([config('saml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
+            Log::stack([config('laravelsaml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
 
             $user_roles = $user->getRoleNames()->all();
             if(in_array('admin', $user_roles)||in_array('manager', $user_roles))
@@ -298,14 +298,14 @@ class Saml2Controller extends Controller
     {
         $user = User::role('admin')->firstOrFail();
         Auth::login($user, true);
-        Log::stack([config('saml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
+        Log::stack([config('laravelsaml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
         return redirect()->route('back-office');
     }
 
     public function logUserById(User $user) // TEMP !
     {
         Auth::login($user, true);
-        Log::stack([config('saml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
+        Log::stack([config('laravelsaml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
         return redirect()->route('back-office');
     }
 }
