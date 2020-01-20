@@ -7,7 +7,7 @@ return [
     'idp_cert_file' => 'idp.crt',
     'sp_entity_id_prod' => 'SP-' . env('APP_NNA') . '-prodn1',
     'sp_entity_id_dev' => 'SP-' . env('APP_NNA') . '-recn1',
-    'idp_logout_url_prod' => 'https://mon-compte.enedis.fr:443/auth/alex-ihm/logout?spEntityId=',
+    'idp_logout_url_prod' => 'https://mon-compte.enedis.fr:443/alex-ihm/logout?spEntityId=',
     'idp_logout_url_dev' => 'https://moncompte-recn1.enedis.fr:10443/alex-ihm/logout?spEntityId=',
     'idp_login_url_prod' => 'https://mon-compte.enedis.fr:443/auth/SSOPOST/metaAlias/enedis/providerIDP',
     'idp_login_url_dev' => 'https://moncompte-recn1.enedis.fr:10443/auth/SSOPOST/metaAlias/enedis/providerIDP',
