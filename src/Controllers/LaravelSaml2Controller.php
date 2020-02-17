@@ -146,7 +146,7 @@ class LaravelSaml2Controller extends Controller
                 }
 
 //                return $this->logUserIn($attributes);
-                app('App\Http\Controllers\Api\UserController')->logUserIn($attributes);
+                return app('App\Http\Controllers\Api\UserController')->logUserIn($attributes);
 
             } else {
                 dd('Signature not validated');
