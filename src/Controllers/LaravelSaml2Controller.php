@@ -146,87 +146,15 @@ class LaravelSaml2Controller extends Controller
                 }
 
 //                return $this->logUserIn($attributes);
-                return app('App\Http\Controllers\Api\UserController')->logUserIn($attributes);
+                return app('App\Http\Controllers\Api\UserController')->logUserIn($attributes); // send attributes to app login function
 
             } else {
-                dd('Signature not validated');
                 abort(401, 'Signature not validated');
             }
         } catch (\Exception $ex) {
-            dd('Signature validation failed');
             abort(401, 'Signature validation failed');
         }
     }
-
-//    public function logUserIn(array $attributes)
-//    {
-//        if(count($attributes) >= 4)
-//        {
-//            // TODO : create manager users / check for roles / other method.
-//
-//            $domain_name = explode('@', $attributes['av2_mail'])[1];
-//            if(in_array($domain_name, config('laravelsaml2.admin_domains')))
-//            {
-//                $user = User::updateOrCreate(
-//                    ['id_interne' => $attributes['av2_interne_id']],
-//                    ['type' => 1, 'email' => $attributes['av2_mail'], 'nom' => $attributes['av2_nom'], 'prenom' => $attributes['av2_prenom']]
-//                );
-//
-//                // create manager role if has not
-//                if($user->getRoleNames()->count() == 0)
-//                {
-//                    $user->syncRoles(['manager']);
-//                }
-//            }
-//            else
-//            {
-//                // User does not need to exist first in app (prestataire)
-//                $user = User::updateOrCreate(
-//                    ['id_interne' => $attributes['av2_interne_id']],
-//                    ['type' => 0, 'email' => $attributes['av2_mail'], 'nom' => $attributes['av2_nom'], 'prenom' => $attributes['av2_prenom']]
-//                );
-//
-//                // create prestataire role if has not
-//                if($user->getRoleNames()->count() == 0)
-//                {
-//                    $user->syncRoles(['prestataire']);
-//                }
-//
-//                // User must exist first in app (prestataire) :
-////                $user = User::where('id_interne', $attributes['av2_interne_id'])->first();
-////                if($user)
-////                {
-////                    $user->update(['last_login' => now(), 'email' => $attributes['av2_mail'], 'nom' => $attributes['av2_nom'], 'prenom' => $attributes['av2_prenom']]);
-////                }
-////                else
-////                {
-////                    abort(401, 'User not found');
-////                }
-//            }
-//
-//            // Log User in
-//            Auth::login($user, true);
-//            $user->update(['last_login' => now()]);
-//
-//            // Save login activity in log
-//            Log::stack([config('laravelsaml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
-//
-//            $user_roles = $user->getRoleNames()->all();
-//            if(in_array('admin', $user_roles)||in_array('manager', $user_roles))
-//            {
-//                return redirect()->route('back-office');
-//            }
-//            else
-//            {
-//                return redirect()->route('webapp');
-//            }
-//        }
-//        else
-//        {
-//            dd('logUserIn');
-//            abort(401, 'Not enough user attributes');
-//        }
-//    }
 
     public function logout()
     {
@@ -293,20 +221,5 @@ class LaravelSaml2Controller extends Controller
         return response($new_xml->saveXML(), 200, [
             "Content-Type" => "application/xml; charset=utf-8"
         ]);
-    }
-
-    public function logAdminIn() // TEMP !
-    {
-        $user = User::role('admin')->firstOrFail();
-        Auth::login($user, true);
-        Log::stack([config('laravelsaml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
-        return redirect()->route('back-office');
-    }
-
-    public function logUserById(User $user) // TEMP !
-    {
-        Auth::login($user, true);
-        Log::stack([config('laravelsaml2.log_channel'), 'stack'])->info('User '. $user->id .' logged in.');
-        return redirect()->route('back-office');
     }
 }
