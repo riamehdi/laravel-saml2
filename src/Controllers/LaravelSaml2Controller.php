@@ -126,7 +126,6 @@ class LaravelSaml2Controller extends Controller
 
         // Verify signature
         $key = KeyHelper::createPublicKey(X509Certificate::fromFile($this->idp_cert_file));
-        dd($key);
         /** @var \LightSaml\Model\XmlDSig\SignatureXmlReader $signatureReader */
         try {
             if ($signatureReader->validate($key)) {
