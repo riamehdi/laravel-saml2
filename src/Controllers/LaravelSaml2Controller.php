@@ -109,8 +109,6 @@ class LaravelSaml2Controller extends Controller
         $deserializationContext = new DeserializationContext();
         $deserializationContext->getDocument()->loadXML($xml);
 
-        dd($deserializationContext);
-
         // deserialize signature
         $signatureReader = new SignatureXmlReader();
         foreach ($deserializationContext->getDocument()->firstChild->childNodes as $node) {
