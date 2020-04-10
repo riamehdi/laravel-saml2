@@ -11,7 +11,7 @@ return [
     'idp_logout_url_dev' => 'https://moncompte-recn1.enedis.fr:10443/alex-ihm/logout?spEntityId=',
     'idp_login_url_prod' => 'https://mon-compte.enedis.fr:443/auth/SSOPOST/metaAlias/enedis/providerIDP',
     'idp_login_url_dev' => 'https://moncompte-recn1.enedis.fr:10443/auth/SSOPOST/metaAlias/enedis/providerIDP',
-    'admin_domains' => ['enedis.fr'],
+    'interne_domains' => ['enedis.fr'],
     'log_channel' => 'users_logins',
     'log_driver' => 'daily',
     'log_path' => storage_path('logs/users/logins.log'),
