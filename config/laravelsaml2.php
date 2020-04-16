@@ -25,7 +25,7 @@ return [
     'gardian_idp_logout_url_prod' => 'https://websso-gardian.myelectricnetwork.com/gardianwebsso/UI/Logout',
     'gardian_idp_logout_url_dev' => 'https://rec-websso-gardian.myelectricnetwork.com/gardianwebsso/UI/Logout',
     'gardian_idp_login_url_prod' => 'https://websso-gardian.myelectricnetwork.com:443/gardianwebsso/SSOPOST/metaAlias/multiauth/idp5',
-    'gardian_idp_login_url_dev' => 'https://test-websso-gardian.edf.fr:443/gardianwebsso/SSOPOST/metaAlias/sesame/idp4',
+    'gardian_idp_login_url_dev' => 'https://websso-gardian.myelectricnetwork.com:443/gardianwebsso/SSOPOST/metaAlias/multiauth/idp5',
 
     // Custom consts
     'interne_domains' => ['enedis.fr'], // domaine de l'adresse e-mail qui permet de reconnaitre les users internes.
