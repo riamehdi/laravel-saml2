@@ -45,15 +45,15 @@ class LaravelSaml2Controller extends Controller
         // environment
         if(App::environment() == 'production')
         {
+            $this->sp_entity_id = config('laravelsaml2.sp_entity_id_prod');
+
             if(config('laravelsaml2.mode') == 'alex')
             {
-                $this->sp_entity_id = config('laravelsaml2.alex_sp_entity_id_prod');
                 $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_prod') . $this->sp_entity_id;
                 $this->idp_login_url = config('laravelsaml2.alex_idp_login_url_prod');
             }
             else if(config('laravelsaml2.mode') == 'gardian')
             {
-                $this->sp_entity_id = config('laravelsaml2.gardian_sp_entity_id_prod');
                 $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_prod') . $this->sp_entity_id;
                 $this->idp_login_url = config('laravelsaml2.gardian_idp_login_url_prod');
             }
@@ -64,15 +64,15 @@ class LaravelSaml2Controller extends Controller
         }
         else // dev or local
         {
+            $this->sp_entity_id = config('laravelsaml2.sp_entity_id_dev');
+
             if(config('laravelsaml2.mode') == 'alex')
             {
-                $this->sp_entity_id = config('laravelsaml2.alex_sp_entity_id_dev');
                 $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_dev') . $this->sp_entity_id;
                 $this->idp_login_url = config('laravelsaml2.alex_idp_login_url_dev');
             }
             else if(config('laravelsaml2.mode') == 'gardian')
             {
-                $this->sp_entity_id = config('laravelsaml2.gardian_sp_entity_id_dev');
                 $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_dev') . $this->sp_entity_id;
                 $this->idp_login_url = config('laravelsaml2.gardian_idp_login_url_dev');
             }
@@ -111,6 +111,7 @@ class LaravelSaml2Controller extends Controller
         $certificate = X509Certificate::fromFile($this->sp_cert_file);
         $privateKey = KeyHelper::createPrivateKey($this->sp_key_file, '', true);
         $authnRequest->setSignature(new SignatureWriter($certificate, $privateKey));
+
 
         $serializationContext = new SerializationContext();
         $authnRequest->serialize($serializationContext->getDocument(), $serializationContext);
@@ -167,7 +168,6 @@ class LaravelSaml2Controller extends Controller
 
                 // load attributes in associative array
                 $attributes = [];
-//                dd($assertion);
                 foreach ($assertion->getFirstAttributeStatement()->getAllAttributes() as $attribute) {
                     $attributes[$attribute->getName()] = $attribute->getFirstAttributeValue();
                 }
