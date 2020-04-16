@@ -45,15 +45,41 @@ class LaravelSaml2Controller extends Controller
         // environment
         if(App::environment() == 'production')
         {
-            $this->sp_entity_id = config('laravelsaml2.sp_entity_id_prod');
-            $this->idp_logout_url = config('laravelsaml2.idp_logout_url_prod') . $this->sp_entity_id;
-            $this->idp_login_url = config('laravelsaml2.idp_login_url_prod');
+            if(config('laravelsaml2.mode') == 'alex')
+            {
+                $this->sp_entity_id = config('laravelsaml2.alex_sp_entity_id_prod');
+                $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_prod') . $this->sp_entity_id;
+                $this->idp_login_url = config('laravelsaml2.alex_idp_login_url_prod');
+            }
+            else if(config('laravelsaml2.mode') == 'gardian')
+            {
+                $this->sp_entity_id = config('laravelsaml2.gardian_sp_entity_id_prod');
+                $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_prod') . $this->sp_entity_id;
+                $this->idp_login_url = config('laravelsaml2.gardian_idp_login_url_prod');
+            }
+            else
+            {
+                abort(400, 'Saml2 mode not defined (see Saml2 plugin config).');
+            }
         }
         else // dev or local
         {
-            $this->sp_entity_id = config('laravelsaml2.sp_entity_id_dev');
-            $this->idp_logout_url = config('laravelsaml2.idp_logout_url_dev') . $this->sp_entity_id;
-            $this->idp_login_url = config('laravelsaml2.idp_login_url_dev');
+            if(config('laravelsaml2.mode') == 'alex')
+            {
+                $this->sp_entity_id = config('laravelsaml2.alex_sp_entity_id_dev');
+                $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_dev') . $this->sp_entity_id;
+                $this->idp_login_url = config('laravelsaml2.alex_idp_login_url_dev');
+            }
+            else if(config('laravelsaml2.mode') == 'gardian')
+            {
+                $this->sp_entity_id = config('laravelsaml2.gardian_sp_entity_id_dev');
+                $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_dev') . $this->sp_entity_id;
+                $this->idp_login_url = config('laravelsaml2.gardian_idp_login_url_dev');
+            }
+            else
+            {
+                abort(400, 'Saml2 mode not defined (see Saml2 plugin config).');
+            }
         }
         $this->sp_acs_url = route('saml2-acs');
 
