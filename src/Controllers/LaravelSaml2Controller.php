@@ -55,7 +55,7 @@ class LaravelSaml2Controller extends Controller
             }
             else if(config('laravelsaml2.mode') == 'gardian')
             {
-                $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_prod') . $this->sp_entity_id;
+                $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_prod');
                 $this->idp_login_url = config('laravelsaml2.gardian_idp_login_url_prod');
             }
             else
@@ -188,7 +188,7 @@ class LaravelSaml2Controller extends Controller
     {
         Auth::logout();
 
-        // disconnect from Alex v2.2
+        // disconnect from IDP
         return redirect($this->idp_logout_url);
     }
 
