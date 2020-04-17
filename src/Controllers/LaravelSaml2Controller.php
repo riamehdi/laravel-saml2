@@ -74,7 +74,7 @@ class LaravelSaml2Controller extends Controller
             }
             else if(config('laravelsaml2.mode') == 'gardian')
             {
-                $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_dev') . $this->sp_entity_id;
+                $this->idp_logout_url = config('laravelsaml2.gardian_idp_logout_url_dev');
                 $this->idp_login_url = config('laravelsaml2.gardian_idp_login_url_dev');
             }
             else
