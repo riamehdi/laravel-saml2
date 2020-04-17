@@ -31,6 +31,7 @@ use LightSaml\Model\XmlDSig\SignatureXmlReader;
 
 class LaravelSaml2Controller extends Controller
 {
+    private $user_controller;
     private $idp_logout_url;
     private $idp_login_url;
     private $sp_entity_id;
@@ -81,7 +82,9 @@ class LaravelSaml2Controller extends Controller
                 abort(400, 'Saml2 mode not defined (see Saml2 plugin config).');
             }
         }
+
         $this->sp_acs_url = route('saml2-acs');
+        $this->user_controller = config('laravelsaml2.app_user_controller');
 
         $this->sp_cert_file = storage_path(config('laravelsaml2.cert_path') . '/' . config('laravelsaml2.sp_cert_file'));
         $this->sp_key_file = storage_path(config('laravelsaml2.cert_path') . '/' . config('laravelsaml2.sp_key_file'));
@@ -171,7 +174,7 @@ class LaravelSaml2Controller extends Controller
                 foreach ($assertion->getFirstAttributeStatement()->getAllAttributes() as $attribute) {
                     $attributes[$attribute->getName()] = $attribute->getFirstAttributeValue();
                 }
-                return app('App\Http\Controllers\Api\UserController')->logUserIn($attributes); // send attributes to app login function
+                return app($this->user_controller)->logUserIn($attributes); // send attributes to app login function
 
             } else {
                 abort(401, 'Signature not validated');

@@ -29,6 +29,7 @@ return [
 
     // Custom consts
     'interne_domains' => ['enedis.fr'], // domaine de l'adresse e-mail qui permet de reconnaitre les users internes.
+    'app_user_controller' => 'App\Http\Controllers\Api\UserController', // UserController where is location the logUserIn($attributes) function
 
     // Logging
     'log_channel' => 'users_logins',
