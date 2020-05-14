@@ -16,19 +16,19 @@ return [
     'sp_entity_id_dev' => 'SP-' . env('APP_NNA') . '-recn1',
 
     //  Alex URLs
-    'alex_idp_logout_url_prod' => 'https://mon-compte.enedis.fr:443/alex-ihm/logout?spEntityId=',
-    'alex_idp_logout_url_dev' => 'https://moncompte-recn1.enedis.fr:10443/alex-ihm/logout?spEntityId=',
-    'alex_idp_login_url_prod' => 'https://mon-compte.enedis.fr:443/auth/SSOPOST/metaAlias/enedis/providerIDP',
-    'alex_idp_login_url_dev' => 'https://moncompte-recn1.enedis.fr:10443/auth/SSOPOST/metaAlias/enedis/providerIDP',
+    'alex_idp_logout_url_prod' => env('SAML2_LOGOUT_URL_PROD', ''),
+    'alex_idp_logout_url_dev' => env('SAML2_LOGOUT_URL_DEV', ''),
+    'alex_idp_login_url_prod' => env('SAML2_LOGIN_URL_PROD', ''),
+    'alex_idp_login_url_dev' => env('SAML2_LOGIN_URL_DEV', ''),
 
     //  Gardian URLs
-    'gardian_idp_logout_url_prod' => 'https://websso-gardian.myelectricnetwork.com/gardianwebsso/UI/Logout',
-    'gardian_idp_logout_url_dev' => 'https://rec-websso-gardian.myelectricnetwork.com/gardianwebsso/UI/Logout',
-    'gardian_idp_login_url_prod' => 'https://websso-gardian.myelectricnetwork.com:443/gardianwebsso/SSOPOST/metaAlias/multiauth/idp5',
-    'gardian_idp_login_url_dev' => 'https://rec-websso-gardian.myelectricnetwork.com:443/gardianwebsso/SSOPOST/metaAlias/multiauth/idp5',
+    'gardian_idp_logout_url_prod' => env('GARDIAN_LOGOUT_URL_PROD', ''),
+    'gardian_idp_logout_url_dev' => env('GARDIAN_LOGOUT_URL_DEV', ''),
+    'gardian_idp_login_url_prod' => env('GARDIAN_LOGIN_URL_PROD', ''),
+    'gardian_idp_login_url_dev' => env('GARDIAN_LOGIN_URL_PROD', ''),
 
     // Custom consts
-    'interne_domains' => ['enedis.fr'], // domaine de l'adresse e-mail qui permet de reconnaitre les users internes.
+    'interne_domains' => [env('SAML2_INTERNE_DOMAIN', 'test.fr')], // domaine de l'adresse e-mail qui permet de reconnaitre les users internes.
     'app_user_controller' => 'App\Http\Controllers\Api\UserController', // UserController where is location the logUserIn($attributes) function
 
     // Logging
