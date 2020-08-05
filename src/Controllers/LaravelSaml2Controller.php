@@ -100,7 +100,7 @@ class LaravelSaml2Controller extends Controller
 
     public function login()
     {
-        // Connection via Saml2 to Alex.v2.2, redircets to Acs() after login.
+        // Connection via Saml2 to Alex.v2.2, redirects to Acs() after login.
 
         $authnRequest = new AuthnRequest();
         $authnRequest
@@ -177,9 +177,11 @@ class LaravelSaml2Controller extends Controller
                 return app($this->user_controller)->logUserIn($attributes); // send attributes to app login function
 
             } else {
+                dump('Signature not validated');
                 abort(401, 'Signature not validated');
             }
         } catch (\Exception $ex) {
+            dump('Signature validation failed');
             abort(401, 'Signature validation failed');
         }
     }
