@@ -177,11 +177,11 @@ class LaravelSaml2Controller extends Controller
                 return app($this->user_controller)->logUserIn($attributes); // send attributes to app login function
 
             } else {
-                dump('Signature not validated');
+//                dump('Signature not validated');
                 abort(401, 'Signature not validated');
             }
         } catch (\Exception $ex) {
-            dump('Signature validation failed');
+//            dump('Signature validation failed');
             abort(401, 'Signature validation failed');
         }
     }
