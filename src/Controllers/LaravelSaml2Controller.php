@@ -172,8 +172,14 @@ class LaravelSaml2Controller extends Controller
                 // load attributes in associative array
                 $attributes = [];
                 foreach ($assertion->getFirstAttributeStatement()->getAllAttributes() as $attribute) {
-//                    $attributes[$attribute->getName()] = $attribute->getFirstAttributeValue();
-                    $attributes[$attribute->getName()] = $attribute->getAllAttributeValues();
+                    if(count($attribute->getAllAttributeValues()) > 1) // many values
+                    {
+                        $attributes[$attribute->getName()] = $attribute->getAllAttributeValues();
+                    }
+                    else // only one value
+                    {
+                        $attributes[$attribute->getName()] = $attribute->getFirstAttributeValue();
+                    }
                 }
                 return app($this->user_controller)->logUserIn($attributes); // send attributes to app login function
 
