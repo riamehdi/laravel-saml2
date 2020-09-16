@@ -25,7 +25,7 @@ return [
     'gardian_idp_logout_url_prod' => env('GARDIAN_LOGOUT_URL_PROD', ''),
     'gardian_idp_logout_url_dev' => env('GARDIAN_LOGOUT_URL_DEV', ''),
     'gardian_idp_login_url_prod' => env('GARDIAN_LOGIN_URL_PROD', ''),
-    'gardian_idp_login_url_dev' => env('GARDIAN_LOGIN_URL_PROD', ''),
+    'gardian_idp_login_url_dev' => env('GARDIAN_LOGIN_URL_DEV', ''),
 
     // Custom consts
     'interne_domains' => [env('SAML2_INTERNE_DOMAIN', 'test.fr')], // domaine de l'adresse e-mail qui permet de reconnaitre les users internes.
