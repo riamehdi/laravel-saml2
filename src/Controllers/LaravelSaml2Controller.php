@@ -173,6 +173,7 @@ class LaravelSaml2Controller extends Controller
                 $attributes = [];
                 foreach ($assertion->getFirstAttributeStatement()->getAllAttributes() as $attribute) {
 //                    $attributes[$attribute->getName()] = $attribute->getFirstAttributeValue();
+
                     $attributes[$attribute->getName()] = $attribute->getAllAttributeValues();
 
                 }
