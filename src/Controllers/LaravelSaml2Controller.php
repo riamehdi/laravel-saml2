@@ -184,12 +184,12 @@ class LaravelSaml2Controller extends Controller
                 return app($this->user_controller)->logUserIn($attributes); // send attributes to app login function
 
             } else {
-                dd('Signature not validated');
-                abort(401, 'Signature not validated');
+                dd('Signature not validated.');
+                abort(401, 'Signature not validated.');
             }
         } catch (\Exception $ex) {
             dd('Error within deserialization.');
-            abort(401, 'Signature validation failed');
+            abort(401, 'Error within deserialization.');
         }
     }
 
