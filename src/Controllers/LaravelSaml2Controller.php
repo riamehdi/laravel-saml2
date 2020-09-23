@@ -188,8 +188,8 @@ class LaravelSaml2Controller extends Controller
                 abort(401, 'Signature not validated.');
             }
         } catch (\Exception $ex) {
-            dd('Error within deserialization.');
-            abort(401, 'Error within deserialization.');
+            dd('Error with login function.');
+            abort(401, 'Error with login function.');
         }
     }
 
