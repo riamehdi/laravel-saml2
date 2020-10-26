@@ -12,7 +12,7 @@
     "homepage": "https://github.com/davikingcode/saml2",
     "keywords": ["DaVikingCode", "Laravel", "Saml2"],
     "require": {
-        "forlabs/lightsaml": "^2.0"
+        "lightsaml/lightsaml": "^1.4"
     },
     "require-dev": {
 
