@@ -1,4 +1,4 @@
-Replaced lightsaml/lightsaml dependency with forlabs/lightsaml
+Replaced lightsaml/lightsaml dependency with forlabs/lightsaml.
 
 # Saml2
 
