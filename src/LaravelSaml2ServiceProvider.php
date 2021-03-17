@@ -32,6 +32,10 @@ class LaravelSaml2ServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+        $this->publishes([
+            __DIR__.'/../config/laravelsaml2.php' => config_path('laravelsaml2.php'),
+        ], 'laravelsaml2.config');
     }
 
     /**
