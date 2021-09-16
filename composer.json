@@ -1,5 +1,5 @@
 {
-    "name": "davikingcode/laravel-saml2",
+    "name": "riamehdi/laravel-saml2",
     "description": ":description",
     "license": "license",
     "authors": [
@@ -9,7 +9,7 @@
             "homepage": "author homepage"
         }
     ],
-    "homepage": "https://github.com/davikingcode/saml2",
+    "homepage": "https://github.com/riamehdi/saml2",
     "keywords": ["DaVikingCode", "Laravel", "Saml2"],
     "require": {
         "forlabs/lightsaml": "^2.0"
