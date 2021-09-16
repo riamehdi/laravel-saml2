@@ -27,7 +27,7 @@ use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Binding\BindingFactory;
 use LightSaml\Context\Profile\MessageContext;
 use LightSaml\Model\XmlDSig\SignatureXmlReader;
-
+use Cookie;
 
 class LaravelSaml2Controller extends Controller
 {
