@@ -182,12 +182,13 @@ class LaravelSaml2Controller extends Controller
                     }
                 }
                 //return app($this->user_controller)->logUserIn($attributes); // send attributes to app login function
-                $minutes = 60;
+                /*$minutes = 60;
                 Cookie::queue('cn', $attributes['cn'], $minutes);
-                Cookie::queue('token', $attributes['token'], $minutes);
+                Cookie::queue('token', $attributes['token'], $minutes);*/
 
-                return redirect()->away('/');
-                
+                //Vue router
+                return redirect()->away('/saml2-auth/'.$attributes['cn'].'/'.$attributes['token']);
+
             } else {
                 dd('Signature not validated.');
                 abort(401, 'Signature not validated.');
