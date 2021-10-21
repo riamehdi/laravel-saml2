@@ -50,7 +50,7 @@ class LaravelSaml2Controller extends Controller
 
             if(config('laravelsaml2.mode') == 'alex')
             {
-                $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_prod') . $this->sp_entity_id;
+                $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_prod');
                 $this->idp_login_url = config('laravelsaml2.alex_idp_login_url_prod');
             }
             else if(config('laravelsaml2.mode') == 'gardian')
@@ -69,7 +69,7 @@ class LaravelSaml2Controller extends Controller
 
             if(config('laravelsaml2.mode') == 'alex')
             {
-                $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_dev') . $this->sp_entity_id;
+                $this->idp_logout_url = config('laravelsaml2.alex_idp_logout_url_dev');
                 $this->idp_login_url = config('laravelsaml2.alex_idp_login_url_dev');
             }
             else if(config('laravelsaml2.mode') == 'gardian')
